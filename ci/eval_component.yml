@@ -1,0 +1,19 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: evaluate-linear-model
+display_name: Evaluate Trained Model
+type: command
+version: 1
+description: Evaluates the trained model and logs metrics
+
+inputs:
+  model_input:
+    type: uri_file
+    description: Trained model file to evaluate
+
+code: .
+environment:
+  conda_file: ci/environment.yml
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04
+
+command: >-
+  python model_eval.py --model_path ${{inputs.model_input}}

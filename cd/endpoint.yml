@@ -1,0 +1,17 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineEndpoint.schema.json
+name: linreg-endpoint
+type: online
+auth_mode: key
+
+deployments:
+  - name: blue
+    model: azureml:linear_regression_model@1
+    code_configuration:
+      code: .
+      scoring_script: score.py
+    environment:
+      conda_file: environment.yml
+      image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04
+    instance_type: Standard_DS1_v2
+    instance_count: 1
+    traffic: 100
