@@ -1,0 +1,7 @@
+name: ml-cli-env
+dependencies:
+  - python=3.8
+  - pip:
+      - scikit-learn
+      - pandas
+      - joblib

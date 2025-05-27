@@ -1,0 +1,17 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+command: >-
+  python train.py --input_data ${{inputs.training_data}} --output_model ${{outputs.model_output}}
+inputs:
+  training_data:
+    path: ../cars.csv
+    type: uri_file
+outputs:
+  model_output:
+    type: uri_file
+    path: ./model.joblib
+code: .
+environment: azureml:ml-cli-env@latest
+compute: local
+experiment_name: train-linear-regression
+display_name: train-job
+description: Training job using CLI component
