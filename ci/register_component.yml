@@ -1,0 +1,19 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: register-linear-model
+display_name: Register Trained Model
+type: command
+version: 1
+description: Registers a trained model with Azure ML
+
+inputs:
+  model_input:
+    type: uri_file
+    description: Trained model artifact
+
+code: .
+environment:
+  conda_file: ci/environment.yml
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04
+
+command: >-
+  python -c "from azure.ai.ml import MLClient; from azure.identity import DefaultAzureCredential; from azure.ai.ml.entities import Model; ml_client = MLClient(DefaultAzureCredential(), '${{inputs.workspace_subscription_id}}', '${{inputs.workspace_rg}}', '${{inputs.workspace_name}}'); ml_client.models.create_or_update(Model(name='linear_regression_model', path='${{inputs.model_input}}'))"

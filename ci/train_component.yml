@@ -1,0 +1,24 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: train-linear-regression
+display_name: Train Linear Regression
+type: command
+version: 1
+description: Train a linear regression model on car sales data
+
+inputs:
+  training_data:
+    type: uri_file
+    description: Input dataset
+
+outputs:
+  model_output:
+    type: uri_file
+    description: Trained model output
+
+environment:
+  conda_file: ci/environment.yml
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04
+
+code: .
+command: >-
+  python train.py --input_data ${{inputs.training_data}} --output_model ${{outputs.model_output}}

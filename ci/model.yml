@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/model.schema.json
+name: linear_regression_model
+version: 1
+path: model.joblib
+type: mlflow_model
+description: Linear regression model predicting car sale prices
