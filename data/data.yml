@@ -1,6 +1,0 @@
-$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
-name: cars-dataset
-description: Car sales dataset
-path: ../cars.csv
-type: uri_file
-version: 1
